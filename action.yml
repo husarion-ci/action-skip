@@ -1,0 +1,24 @@
+name: Get skip argument
+description: Look for skip argument in PR body
+
+inputs:
+  text:
+    description: Optional text to use instead of the default PR body.
+    required: false
+    default: ${{ github.event.pull_request.body }}
+
+outputs:
+  skip:
+    description: skip argument
+    value: ${{ steps.get-skip.outputs.skip }}
+
+
+runs:
+  using: composite
+  steps:
+    -
+      id: get-skip
+      run: |
+        ./${{ github.action_path }}/get_version_bump.sh '${{ inputs.text }}';
+        echo ::set-output name=skip::$(cat skip_arg.txt)
+      shell: bash
