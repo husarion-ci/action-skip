@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 
 import sys
-print(sys.argv)
 if len(sys.argv) == 2:
     arg = sys.argv[1].split("skip::")
     if len(arg) > 1:

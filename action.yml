@@ -16,9 +16,15 @@ outputs:
 runs:
   using: composite
   steps:
+    - name: debug
+      run: |
+        cd ${{ github.action_path }};
+        ls
+      shell: bash
     -
       id: get-skip
       run: |
-        ./${{ github.action_path }}/get_version_bump.sh '${{ inputs.text }}';
+        touch skip_arg.txt;
+        python3 ${{ github.action_path }}/get_skip_argument.py '${{ inputs.text }}';
         echo ::set-output name=skip::$(cat skip_arg.txt)
       shell: bash
