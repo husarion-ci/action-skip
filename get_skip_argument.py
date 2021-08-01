@@ -2,6 +2,7 @@
 
 import sys
 if len(sys.argv) == 2:
+    print(sys.argv[1])
     arg = sys.argv[1].split("skip::")
     if len(arg) > 1:
         arg = arg[1].split()[0]
