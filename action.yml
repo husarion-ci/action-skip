@@ -25,6 +25,7 @@ runs:
       id: get-skip
       run: |
         touch skip_arg.txt;
-        python3 ${{ github.action_path }}/get_skip_argument.py '${{ inputs.text }}';
+        
+        python3 ${{ github.action_path }}/get_skip_argument.py $'{{ inputs.text }}' | tr -dc '[:alnum:]\n\r' | tr '[:upper:]' '[:lower:]' ;
         echo ::set-output name=skip::$(cat skip_arg.txt)
       shell: bash
